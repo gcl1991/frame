@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active:
+      - xmlconfig
+      - javaconfig
+      - javadsl # 同时激活优先使用dsl
+
+

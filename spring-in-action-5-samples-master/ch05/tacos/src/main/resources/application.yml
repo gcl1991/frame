@@ -1,0 +1,65 @@
+# 通用配置
+
+#spring:
+#  profiles:
+#    active:
+#    - prod
+#spring:
+#  security:
+#    user:
+#      name: buzz
+#      password: infinity
+
+logging:
+  level:
+    tacos: DEBUG
+  path: ./logs # 默认目录基于根目录tacos,打包成jar后为jar文件同级目录
+  file: ${logging.path}/fileName.log # 必须要引用path,文件夹不存在将会被创建
+
+taco:
+  orders:
+    pageSize: 10
+
+
+  discount:
+    codes:
+      abcdef: 10
+
+--- # 生产环境配置
+spring:
+  profiles: prod
+  # 如果在类路径中存在Tomcat的JDBC连接池，DataSource将使用该连接池。
+#  datasource:
+#    url: jdbc:mysql://localhost/tacocloud
+#    username: tacouser
+#    password: tacopassword
+#    driver-class-name: com.mysql.jdbc.Driver  # 一般不用配置，会根据url推断
+#    schema:
+#    - order-schema.sql
+#    data:
+#    - ingredients.sql
+#    jndi-name: java:/comp/env/jdbc/tacoCloudDS # 将忽略其他数据库连接属性
+
+
+logging:
+  level:
+    tacos: DEBUG
+  path: ./logs
+  file: ${logging.path}/fileName.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  org.springframework.security: DEBUG
+
+server:
+  port: 9090 # 配置servlet容器的端口,设置为0代表随机端口
+#  ssl: # 启用https
+#    key-store: file:///path/to/mykeys.jks
+#    key-store-password: letmein
+#    key-password: letmein
+
+#greeting:
+#  welcome: ${spring.application.name} # 属性引用
+#  welcome: user ${spring.application.name} # 属性引用,可以嵌入到文本中
+
+
+    
