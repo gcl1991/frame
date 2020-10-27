@@ -1,6 +1,7 @@
 package sia5;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
+
+import static java.util.stream.Collectors.toList;
 
 public class FluxBufferingTests {
 
@@ -35,15 +38,17 @@ public class FluxBufferingTests {
                                 .map(y -> y.toUpperCase())
                                 .subscribeOn(Schedulers.parallel())
                                 .log()
-                ).subscribe();
+                ).subscribe(System.out::println);
     }
 
     @Test
     public void collectList() {
         Flux<String> fruitFlux = Flux.just(
                 "apple", "orange", "banana", "kiwi", "strawberry");
+        System.out.println(fruitFlux.toStream().collect(toList()));
 
         Mono<List<String>> fruitListMono = fruitFlux.collectList();
+        System.out.println(fruitListMono.block());
 
         StepVerifier
                 .create(fruitListMono)

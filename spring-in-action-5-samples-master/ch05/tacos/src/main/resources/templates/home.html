@@ -3,15 +3,19 @@
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Taco Cloud</title>
+    <link th:href="@{/home.css}" type="text/css" rel="stylesheet">
   </head>
   
   <body>
+  <header>
     <h1>Welcome to...</h1>
+  </header>
+  <main>
     <img th:src="@{/images/TacoCloud.png}"/>
-    <form method="POST" th:action="@{/logout}" id="logoutForm">
-      <input type="submit" value="Logout"/>
-    </form>
-    
-    <a th:href="@{/design}" id="design">Design a taco</a>
+  </main>
+  <nav>
+    <a th:href="@{/login}">登录</a>
+    <a th:href="@{/register}">注册</a>
+  </nav>
   </body>
 </html>

@@ -7,13 +7,13 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import tacos.Order;
 
 @Service
-public class RabbitOrderMessagingService
-       implements OrderMessagingService {
-  
+public class RabbitOrderMessagingService  implements OrderMessagingService {
+
   private RabbitTemplate rabbit;
   
   @Autowired
@@ -21,7 +21,7 @@ public class RabbitOrderMessagingService
     this.rabbit = rabbit;
   }
   
-  public void sendOrder(Order order) {
+  public void sendOrder(@RequestBody Order order) {
     rabbit.convertAndSend("tacocloud.order.queue", order,
         new MessagePostProcessor() {
           @Override
@@ -30,8 +30,8 @@ public class RabbitOrderMessagingService
             MessageProperties props = message.getMessageProperties();
             props.setHeader("X_ORDER_SOURCE", "WEB");
             return message;
-          } 
+          }
         });
   }
-  
+
 }

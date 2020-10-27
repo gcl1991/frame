@@ -4,13 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller            // <1>
+@Controller
 @RequestMapping("/")
 public class HomeController {
 
-  @GetMapping     // <2>
+  @GetMapping
   public String home() {
-    return "home";     // <3>
+    return "home";
   }
 
 }

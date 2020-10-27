@@ -3,7 +3,7 @@ server:
 spring:
   profiles:
     active:
-      - jms-template
+      - rabbitmq-template
 ---
 spring:
   profiles: jms-template, jms-listener
@@ -19,7 +19,17 @@ spring:
     password: letm31n
     embedded:
       enabled: true
-    
+
+---
+spring :
+  profiles: rabbitmq-template
+  rabbitmq:
+    host: localhost
+    port: 5672
+    user: guest
+    password: guest
+
+
 ---
 spring:
   profiles: kafka-listener

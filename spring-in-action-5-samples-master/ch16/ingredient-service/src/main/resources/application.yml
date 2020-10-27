@@ -12,21 +12,22 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      
+
 management:
   endpoints:
     web:
+      base-path: /see
       exposure:
         include: '*'
         exclude: threaddump, heapdump
   endpoint:
     health:
       show-details: always
-  info:
-    git:
-      mode: full
-          
-info:
-  contact:
-    email: support@tacocloud.com
-    phone: 822-625-6831
+#  info:
+#    git:
+#      mode: full
+#
+#info:
+#  contact:
+#    email: support@tacocloud.com
+#    phone: 822-625-6831

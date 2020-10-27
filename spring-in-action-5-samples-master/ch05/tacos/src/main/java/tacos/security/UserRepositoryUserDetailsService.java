@@ -11,8 +11,7 @@ import tacos.User;
 import tacos.data.UserRepository;
 
 @Service
-public class UserRepositoryUserDetailsService 
-        implements UserDetailsService {
+public class UserRepositoryUserDetailsService implements UserDetailsService {
 
   private UserRepository userRepo;
 

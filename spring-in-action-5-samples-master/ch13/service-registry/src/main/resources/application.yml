@@ -1,26 +1,31 @@
-server:
-  port: 8761
-  
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
-    enable-self-preservation: false
+#server:
+#  port: 8080
+
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#  server:
+#    enable-self-preservation: false
 
 #
 # Uncomment if you'd rather use multi-peer Eureka with the eureka-1 and eureka-2 
 # profiles below (see Listing 13.1)
-#   
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://${other.eureka.host}:${other.eureka.port}/eureka
-    
+#
+spring:
+  profiles:
+    active:
+      - eureka-1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${other.eureka.host}:${other.eureka.port}/eureka
+
 ---
 spring:
   profiles: eureka-1
@@ -37,7 +42,7 @@ eureka:
 other:
   eureka:
     host: localhost
-    port: 8762
+    port: 8761
 
 ---
 spring:
@@ -50,7 +55,7 @@ server:
 
 eureka:
   instance:
-    hostname: eureka1.tacocloud.com
+    hostname: eureka2.tacocloud.com
 
 other:
   eureka:

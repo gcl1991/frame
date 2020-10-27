@@ -1,0 +1,7 @@
+header,main {
+    text-align:center;
+}
+
+input[value=Login]{
+    text-align:right;
+}
