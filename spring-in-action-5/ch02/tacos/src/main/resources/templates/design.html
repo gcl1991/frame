@@ -1,10 +1,9 @@
-<!-- tag::all[] -->
-<!-- tag::head[] -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Taco Cloud</title>
+<!--    // @{}链接表达式：相对于应用根目录引用资源-->
     <link rel="stylesheet" th:href="@{/styles.css}" />
   </head>
 
@@ -12,25 +11,23 @@
     <h1>Design your taco!</h1>
     <img th:src="@{/images/TacoCloud.png}"/>
 
-<!-- tag::formTag[] -->
     <form method="POST" th:object="${design}">
-    <!-- end::all[] -->
     <span class="validationError"
           th:if="${#fields.hasErrors('ingredients')}"
           th:errors="*{ingredients}">Ingredient Error</span>
+<!--    // *{ingredients}选择表达式：相当于design.ingredients（相对于先前选择的对象th:object）-->
+<!--    // ${design}变量表达式：从Spring上下文变量（即model）中检索指定变量-->
+<!--    // #fields.hasErrors('ingredients')消息表达式：通过键来引用消息(从MessageSource中)-->
 
-    <!-- tag::all[] -->
     <div class="grid">
-<!-- end::formTag[] -->
-<!-- end::head[] -->
       <div class="ingredient-group" id="wraps">
-<!-- tag::designateWrap[] -->
       <h3>Designate your wrap:</h3>
+<!--      // 变量表达式:将从model中检索名字为wrap的变量，并循环遍历，将元素赋值为ingredient-->
+<!--      // th:each重复它所在元素的次数，这两将创建多个同级div-->
       <div th:each="ingredient : ${wrap}">
         <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
         <span th:text="${ingredient.name}">INGREDIENT</span><br/>
       </div>
-<!-- end::designateWrap[] -->
       </div>
 
 	  <div class="ingredient-group" id="proteins">
@@ -71,19 +68,13 @@
 
       <h3>Name your taco creation:</h3>
       <input type="text" th:field="*{name}"/>
-      <!-- end::all[] -->
-<!--      <span th:text="${#fields.hasErrors('name')}">XXX</span>-->
       <span class="validationError"
             th:if="${#fields.hasErrors('name')}"
             th:errors="*{name}">Name Error</span>
-      <!-- tag::all[] -->
       <br/>
 
       <button>Submit your taco</button>
       </div>
-<!-- tag::closeFormTag[] -->
     </form>
-<!-- end::closeFormTag[] -->
   </body>
 </html>
-<!-- end::all[] -->

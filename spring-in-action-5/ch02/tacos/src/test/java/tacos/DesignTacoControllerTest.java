@@ -1,20 +1,14 @@
-// tag::testShowDesignForm[]
 package tacos;
-import static org.mockito.Mockito.verify;
-import static 
-    org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static 
-    org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,32 +16,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import tacos.Ingredient.Type;
 import tacos.web.DesignTacoController;
 
-//tag::testProcessForm[]
 @RunWith(SpringRunner.class)
 @WebMvcTest(DesignTacoController.class)
 public class DesignTacoControllerTest {
-//end::testProcessForm[]
 
   @Autowired
   private MockMvc mockMvc;
   
   private List<Ingredient> ingredients;
 
-//end::testShowDesignForm[]
-
-  /*
-//tag::testProcessForm[]
-   ...
-
-//end::testProcessForm[]
- */
-
-//tag::testProcessForm[]
   private Taco design;
 
-//end::testProcessForm[]
-
-//tag::testShowDesignForm[]
   @BeforeClass
   public static void setupClass(){
     System.out.println("setup class end");
@@ -68,13 +47,10 @@ public class DesignTacoControllerTest {
       new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
     );
     
-//end::testShowDesignForm[]
-    
     design = new Taco();
     design.setName("Test Taco");
     design.setIngredients(Arrays.asList("FLTO", "GRBF", "CHED"));
     System.out.println("setup end");
-//tag::testShowDesignForm[]
   }
 
   @Test
@@ -88,16 +64,7 @@ public class DesignTacoControllerTest {
         .andExpect(model().attribute("cheese", ingredients.subList(6, 8)))
         .andExpect(model().attribute("sauce", ingredients.subList(8, 10)));
   }
-//end::testShowDesignForm[]
 
-  /*
-//tag::testProcessForm[]
-   ...
-
-//end::testProcessForm[]
- */
-  
-//tag::testProcessForm[]
   @Test
   public void processDesign() throws Exception {
     mockMvc.perform(post("/design")
@@ -106,8 +73,4 @@ public class DesignTacoControllerTest {
         .andExpect(status().is3xxRedirection())
         .andExpect(header().stringValues("Location", "/orders/current"));
   }
-
-//tag::testShowDesignForm[]
 }
-//end::testShowDesignForm[]
-//end::testProcessForm[]

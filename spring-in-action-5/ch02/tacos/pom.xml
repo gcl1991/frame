@@ -73,7 +73,9 @@
     <dependency>
     	<groupId>org.projectlombok</groupId>
     	<artifactId>lombok</artifactId>
-    	<!-- <scope>compileOnly</scope> -->
+        <version>1.18.10</version>
+<!--        <scope>provided</scope>-->
+<!--      <scope>compileOnly</scope>-->
     </dependency>
   </dependencies>
 

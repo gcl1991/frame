@@ -9,8 +9,8 @@ import lombok.Data;
 
 @Data
 public class Order {
-
-  @NotBlank(message="Name is required") // 不能为null "" " "
+  // 带注释的元素不能为null且必须包含至少一个 非空白字符(不可为“”和“ ”)
+  @NotBlank(message="Name is required")
   private String name;
 
   @NotBlank(message="Street is required")
