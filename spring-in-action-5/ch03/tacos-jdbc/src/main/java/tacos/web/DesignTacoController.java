@@ -26,7 +26,8 @@ import tacos.data.IngredientRepository;
 
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("order") // 指定将模型order属性保存到会话中，以作为跨请求使用
+// 指定将模型order属性保存到会话中，以作为跨请求使用
+@SessionAttributes("order")
 public class DesignTacoController {
   
   private final IngredientRepository ingredientRepo;
@@ -39,7 +40,8 @@ public class DesignTacoController {
     this.designRepo = designRepo;
   }
 
-  @ModelAttribute(name = "order") // 在模型中创建属性name=order可以省略，因为默认会使用方法名作为属性
+  @ModelAttribute(name = "order")
+  // 在模型中创建属性name=order可以省略，因为默认会使用方法名作为属性
   public Order order() {
     return new Order();
   }
@@ -52,7 +54,7 @@ public class DesignTacoController {
   @GetMapping
   public String showDesignForm(Model model) {
     List<Ingredient> ingredients = new ArrayList<>();
-    ingredientRepo.findAll().forEach(i -> ingredients.add(i));
+    ingredientRepo.findAll().forEach(ingredients::add);
     
     Type[] types = Ingredient.Type.values();
     for (Type type : types) {

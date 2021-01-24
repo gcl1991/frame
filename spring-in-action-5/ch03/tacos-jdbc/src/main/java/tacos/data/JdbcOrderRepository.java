@@ -1,4 +1,3 @@
-// tag::core[]
 package tacos.data;
 
 import java.util.Date;

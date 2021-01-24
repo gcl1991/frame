@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import tacos.Ingredient;
@@ -42,7 +41,8 @@ public class JdbcIngredientRepository implements IngredientRepository {
                 ingredient.getType().toString());
         return ingredient;
     }
-    // rowNum当前行数
+
+    // rowNum当前行号
     private Ingredient mapRowToIngredient(ResultSet rs, int rowNum) throws SQLException {
         return new Ingredient(
                 rs.getString("id"),
