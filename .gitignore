@@ -1,5 +1,4 @@
 Cloudera大数据平台实战指南
-proficiency-spring4x
 target/
 !*.mvn/wrapper/maven-wrapper.jar
 
