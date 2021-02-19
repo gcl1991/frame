@@ -17,11 +17,11 @@ import com.smart.service.UserService;
 public class LoginController {
     private UserService userService;
 
+    //默认即处理Get，也处理Post请求
     @RequestMapping(value = "/index.html")
     public String loginPage() {
         return "login";
     }
-
 
     // 请求参数会按参数名字默认契约绑定到LoginCommand对象
     @RequestMapping(value = "/loginCheck.html")
