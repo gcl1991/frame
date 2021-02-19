@@ -11,9 +11,10 @@ import org.springframework.web.WebApplicationInitializer;
 
 import javax.sql.DataSource;
 
-//@Configuration
-//@ComponentScan
-//@EnableAutoConfiguration
+/**
+ * SpringBootServletInitializer和WebApplicationInitializer不是必须的
+ * Web War应用访问JSP，需要通过Plugins的spring-boot:run插件启动
+ * */
 @SpringBootApplication
 @EnableTransactionManagement
 public class Application  extends SpringBootServletInitializer implements WebApplicationInitializer {
