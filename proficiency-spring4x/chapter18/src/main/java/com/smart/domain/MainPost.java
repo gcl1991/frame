@@ -11,15 +11,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- *<br>
- * <b>类描述:</b>
- * 
- * <pre>
  * 主题对应的主题帖
- * </pre>
- * 
- * @see
- *@since
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

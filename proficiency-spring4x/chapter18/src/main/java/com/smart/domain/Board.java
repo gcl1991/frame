@@ -13,12 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_board")
+@Getter
+@Setter
 public class Board extends BaseDomain {
 
 	@Id
@@ -37,47 +41,4 @@ public class Board extends BaseDomain {
 	
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "manBoards", fetch = FetchType.LAZY)
 	private Set<User> users = new HashSet<User>();
-
-	public int getTopicNum() {
-		return topicNum;
-	}
-
-	public void setTopicNum(int topicNum) {
-		this.topicNum = topicNum;
-	}
-
-	public String getBoardDesc() {
-		return boardDesc;
-	}
-
-	public void setBoardDesc(String boardDesc) {
-		this.boardDesc = boardDesc;
-	}
-
-	public int getBoardId() {
-		return boardId;
-	}
-
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
-	}
-
-	public String getBoardName() {
-		return boardName;
-	}
-
-	public void setBoardName(String boardName) {
-		this.boardName = boardName;
-	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-    
-
 }

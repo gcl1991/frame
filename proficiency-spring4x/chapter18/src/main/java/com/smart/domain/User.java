@@ -16,12 +16,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "t_user")
+@Getter
+@Setter
 public class User extends BaseDomain {
     /**
      *锁定用户对应的状态值 
@@ -66,81 +70,4 @@ public class User extends BaseDomain {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
     @JoinTable(name = "t_board_manager", joinColumns = {@JoinColumn(name ="user_id" )}, inverseJoinColumns = {@JoinColumn(name = "board_id") })
 	private Set<Board> manBoards = new HashSet<Board>();
-
-	public int getCredit() {
-		return credit;
-	}
-
-	public void setCredit(int credit) {
-		this.credit = credit;
-	}
-
-	public int getLocked() {
-		return locked;
-	}
-
-	public void setLocked(int locked) {
-		this.locked = locked;
-	}
-	
-	public Set<Board> getManBoards()
-    {
-        return manBoards;
-    }
-
-    public void setManBoards(Set<Board> manBoards)
-    {
-        this.manBoards = manBoards;
-    }
-
-    public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-    public int getUserType()
-    {
-        return userType;
-    }
-
-    public void setUserType(int userType)
-    {
-        this.userType = userType;
-    }
-
-	public String getLastIp() {
-		return lastIp;
-	}
-
-	public void setLastIp(String lastIp) {
-		this.lastIp = lastIp;
-	}
-
-	public Date getLastVisit() {
-		return lastVisit;
-	}
-
-	public void setLastVisit(Date lastVisit) {
-		this.lastVisit = lastVisit;
-	}
-
 }
