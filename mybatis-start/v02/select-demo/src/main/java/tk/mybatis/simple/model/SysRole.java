@@ -9,7 +9,7 @@ import java.util.Date;
 public class SysRole implements Serializable {
 	private Long id;
 	private String roleName;
-	private int enable;
+	private int enabled;
 	private String createBy;
 	private Date createTime;
 	private SysUser user;
