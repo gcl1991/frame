@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tk.mybatis.simple.mapper.UserMapper">
+    <select id="selectById" resultType="SysUser">
+        select * from sys_user where id=#{id}
+    </select>
+    <select id="selectByIds" resultType="SysUser">
+        select id,
+        user_name,
+        user_password,
+        user_email,
+        user_info,
+        head_img,
+        create_time
+        from sys_user
+        where id in
+        <foreach collection="list" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </select>
+    <insert id="insertUsers" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user(
+        user_name, user_password, user_email,
+        user_info, head_img, create_time)
+        values
+        <foreach collection="list" item="user" separator=",">
+            (
+            #{user.userName},#{user.userPassword},#{user.userEmail},
+            #{user.userInfo},#{user.headImg, jdbcType=BLOB},
+            #{user.createTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+    <update id="updateByMap">
+        update sys_user
+        set
+        <foreach collection="maps" item="val" index="key" separator=",">
+            ${key} = #{val}
+        </foreach>
+        where id = #{maps.id}
+    </update>
+    <select id="selectByNameAndEmail" resultType="SysUser">
+        select * from sys_user
+        <where>
+            <if test="userName != null and userName != '' ">
+                <bind name="userNameLike" value="'%' + userName + '%'"/>
+                and user_name like #{userNameLike}
+            </if>
+            <if test="userEmail != null and userEmail != '' ">
+                and user_email = #{userEmail}
+            </if>
+            <choose>
+                <when test="userName == null and userEmail == null">
+                    and 1 = 2
+                </when>
+                <when test="userName=='' and userEmail == ''">
+                    and 1 = 2
+                </when>
+            </choose>
+        </where>
+    </select>
+    <update id="updateById">
+        update sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="@tk.mybatis.simple.util.StringUtil@isNotEmpty(userName)">
+                user_name = #{userName},
+            </if>
+            id = #{id}
+        </trim>
+        where id = #{id}
+    </update>
+</mapper>
